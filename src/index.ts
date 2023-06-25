@@ -7,6 +7,9 @@
  *
  * Learn more at https://developers.cloudflare.com/workers/
  */
+import {buildHomePage} from "./pages/home";
+import {Player} from "./models/player";
+import {Game} from "./models/game";
 
 export interface Env {
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
@@ -17,6 +20,17 @@ export interface Env {
 	//
 	// Example binding to R2. Learn more at https://developers.cloudflare.com/workers/runtime-apis/r2/
 	// MY_BUCKET: R2Bucket;
+	DB: D1Database;
+}
+
+async function buildResponse(path: string, env: Env): Promise<string> {
+	if (path === "/") {
+		const players = await Player.all(env.DB);
+		const games = await Game.all(env.DB);
+
+		return buildHomePage(players, games);
+	}
+	return "";
 }
 
 export default {
@@ -25,6 +39,15 @@ export default {
 		env: Env,
 		ctx: ExecutionContext
 	): Promise<Response> {
-		return new Response("Hello World!");
+		const url = new URL(request.url);
+
+		// get path
+		const path = url.pathname;
+
+		return new Response(await buildResponse(path, env), {
+			headers: {
+				"content-type": "text/html;charset=UTF-8",
+			}
+		});
 	},
 };

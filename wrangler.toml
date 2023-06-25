@@ -6,3 +6,4 @@ compatibility_date = "2023-06-25"
 binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "rangers-chess"
 database_id = "f963b960-414c-42ec-a4e4-81cce0893d08"
+preview_database_id = "f963b960-414c-42ec-a4e4-81cce0893d08"
