@@ -36,11 +36,11 @@ export function buildPlayerPage(player: Player, players: Player[], records: Game
         <tbody>
             ${perPlayerStats.map(stat => {
                 const player = players.find(p => p.id == stat.playerId) || {} as IPlayer;
+                // reverse order cus it's OUR record against THEM
                 return `
-    
                 <tr>
                     <td><a href="/player/${player.username}">${player.username}</a></td>
-                    <td>${stat.wins} - ${stat.draws} - ${stat.losses}</td>
+                    <td>${stat.losses} - ${stat.draws} - ${stat.wins}</td>
                 </tr>
                 `;
             }).join('')}
