@@ -18,12 +18,12 @@ export function buildPlayerPage(player: Player, players: Player[], records: Game
 
     return DEFAULT_LAYOUT.replace("{{ yield }}", `
     <h1>Player Page for ${player.username}</h1>
-    <p>This is their stats page. All stats are wins - draws - losses.</p>
+    <p>This is their stats page. All stats are wins - losses - draws.</p>
     
     <p><a href="/" class="btn btn-primary">Home</a></p>
     
     <h2>Records</h2>
-    <p>Overall: ${stats.wins} - ${stats.draws} - ${stats.losses}</p>
+    <p>Overall: ${stats.wins} - ${stats.losses} - ${stats.draws}</p>
 
     <h2>Per-Player Breakdown</h2>
     <table class="table table-striped table-bordered table-hover">
@@ -40,7 +40,7 @@ export function buildPlayerPage(player: Player, players: Player[], records: Game
                 return `
                 <tr>
                     <td><a href="/player/${player.username}">${player.username}</a></td>
-                    <td>${stat.losses} - ${stat.draws} - ${stat.wins}</td>
+                    <td>${stat.losses} - ${stat.wins} - ${stat.draws}</td>
                 </tr>
                 `;
             }).join('')}
@@ -62,15 +62,14 @@ export function buildPlayerPage(player: Player, players: Player[], records: Game
             ${records.map(game => {
                 const isPlayerWhite = game.white == player.id;
 
-                const playa = isPlayerWhite ? players.find(p => p.id == game.white) : players.find(p => p.id == game.black);
                 const opponent = isPlayerWhite ? players.find(p => p.id == game.black) : players.find(p => p.id == game.white);
 
                 const white = isPlayerWhite ? player.username : opponent?.username;
                 const black = isPlayerWhite ? opponent?.username : player.username;
 
                 // row class, red if loss, green if win, grey if draw
-                let rowClass = "";
-                let result = "";
+                let rowClass: string;
+                let result: string;
                 if (game.winner == null) {
                     rowClass = "table-secondary";
                     result = "Draw";
