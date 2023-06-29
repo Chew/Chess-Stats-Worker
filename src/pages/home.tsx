@@ -18,7 +18,9 @@ export function buildHomePage(players: Player[], records: Game[]): string {
         return b.wins - a.wins;
     });
 
-    return DEFAULT_LAYOUT.replace("{{ yield }}", `
+    return DEFAULT_LAYOUT
+        .replace("{{ meta }}", MiscUtil.buildMetaTags("Home", "The home page of Rangers Republic Chess stats!"))
+        .replace("{{ yield }}", `
     <h1>Home</h1>
     <p>This is the home page.</p>
     

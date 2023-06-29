@@ -32,4 +32,23 @@ export class MiscUtil {
             playerId, wins, losses, draws, winPct
         }
     }
+
+    /**
+     * Adds necessary tags for meta where needed
+     * @param title The title of the page. Appears in navbar and embed titles. Do not include "- Service"
+     * @param description Embed description
+     */
+    static buildMetaTags(title: string, description: string) {
+        return `
+                <title>${title}</title>
+                <meta property="og:title" content="${title}">
+                <meta property="twitter:title" content="${title}">
+                <meta property="description" content="${description}">
+                <meta name="description" content="${description}">
+                <meta property="og:description" content="${description}">
+                <meta property="og:site_name" content="Rangers Republic Chess Stats">
+                <meta name="theme-color" content="#F078DD">
+                <meta name="keywords" content="chew">
+        `;
+    }
 }

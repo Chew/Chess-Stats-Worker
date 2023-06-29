@@ -16,7 +16,10 @@ export function buildPlayerPage(player: Player, players: Player[], records: Game
         // filter self
         .filter(p => p.playerId != player.id);
 
-    return DEFAULT_LAYOUT.replace("{{ yield }}", `
+    return DEFAULT_LAYOUT
+        .replace("{{ meta }}", MiscUtil.buildMetaTags(`${player.username}'s stats`,
+            `View ${player.username}'s chess stats! Their overall record is ${stats.wins} - ${stats.losses} - ${stats.draws}.`))
+        .replace("{{ yield }}", `
     <h1>Player Page for ${player.username}</h1>
     <p>This is their stats page. All stats are wins - losses - draws.</p>
     
