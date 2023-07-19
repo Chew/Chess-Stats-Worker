@@ -73,7 +73,7 @@ export function buildPlayerPage(player: Player, players: Player[], records: Game
                 // row class, red if loss, green if win, grey if draw
                 let rowClass: string;
                 let result: string;
-                if (game.winner == null) {
+                if (game.isDraw()) {
                     rowClass = "table-secondary";
                     result = "Draw";
                 } else if (game.winner == player.id) {

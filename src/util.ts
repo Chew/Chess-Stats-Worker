@@ -17,12 +17,12 @@ export class MiscUtil {
         for (const game of games) {
             if (game.white != playerId && game.black != playerId) continue;
 
-            if (game.winner == null) {
-                draws++;
-            } else if (game.winner == playerId) {
+            if (game.winner == playerId) {
                 wins++;
-            } else {
+            } else if (Number.isInteger(game.winner)) {
                 losses++;
+            } else {
+                draws++;
             }
         }
 

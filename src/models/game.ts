@@ -29,4 +29,8 @@ export class Game implements IGame {
         return res.results as Game[];
     }
 
+    // if it's draw
+    isDraw(): boolean {
+        return !Number.isInteger(this.winner);
+    }
 }
