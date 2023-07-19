@@ -26,7 +26,7 @@ export class MiscUtil {
             }
         }
 
-        const winPct = (wins / (wins + losses + draws)) * 100;
+        const winPct = ((wins + 0.5 * draws) / (wins + losses + draws)) * 100;
 
         return {
             playerId, wins, losses, draws, winPct
